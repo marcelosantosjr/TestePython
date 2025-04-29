@@ -1,5 +1,5 @@
 import streamlit as st
-from azure.storage.blob import BlobserviceClient
+from azure.storage.blob import BlobServiceClient
 import os
 import pymysql
 import pymssql
@@ -23,11 +23,11 @@ st.title('Cadastro de Produtos')
 product_name = st.text_input('Nome do Produto')
 product_price = st.number_input('Preço do Produto', min_value=0.0, format='%2f')
 product_description = st.text_area('Descrição do Produto')
-product_image = st.file_upLoader ('Imagem do Produto', type=['jpg', 'png', 'jpeg'])
+product_image = st.file_uploader ('Imagem do Produto', type=['jpg', 'png', 'jpeg'])
 
 #Save image on blobo storage
 def upload_blob(file):
-    blob_service_client = BlobserviceClient.from_connection_string(blobConnectionString)
+    blob_service_client = BlobServiceClient.from_connection_string(blobConnectionString)
     container_client = blob_service_client.get_container_client(blobContainerName)
     blob_name = str(uuid.uuid4()) + file.name
     blob_client = container_client.get_blob_client(blob_name)
